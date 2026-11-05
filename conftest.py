@@ -1,7 +1,7 @@
 import pytest
 
 from clients.api_client import ApiClient
-from config.settings import BASE_URL
+from config.api_config import ApiConfig
 
 pytest_plugins = ("pytester",)
 
@@ -10,7 +10,7 @@ setup_calls_by_module: dict[str, int] = {}
 
 @pytest.fixture(scope="session")
 def base_url() -> str:
-    return BASE_URL
+    return ApiConfig.from_environment().base_url
 
 
 @pytest.fixture(scope="session")

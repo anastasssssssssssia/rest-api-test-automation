@@ -24,7 +24,10 @@ def test_user_data_is_not_affected_by_other_tests(user_data):
 def test_base_url_get_user_returns_user_one(base_url):
     response = requests.get(f"{base_url}/users/1", timeout=TIMEOUT)
     assert response.status_code == 200
-    assert response.json()["id"] == 1
+    user = response.json()
+    assert type(user["id"]) is int
+    assert user["id"] == 1
+    assert "username" in user
 
 
 def test_yield_fixture_clears_items_after_test(temp_items, cleanup_counter):

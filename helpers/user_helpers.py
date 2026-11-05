@@ -9,9 +9,19 @@ class UserValidator:
 
     @staticmethod
     def is_valid_email(email: str) -> bool:
-        if not isinstance(email, str) or "@" not in email:
+        if not isinstance(email, str):
             return False
-        name, domain = email.split("@", 1)
-        has_dot = "." in domain
-        dot_at_edge = domain.startswith(".") or domain.endswith(".")
-        return bool(name) and has_dot and not dot_at_edge
+
+        if email.count("@") != 1:
+            return False
+
+        if any(char.isspace() for char in email):
+            return False
+
+        name, domain = email.split("@")
+        return (
+            bool(name)
+            and "." in domain
+            and not domain.startswith(".")
+            and not domain.endswith(".")
+        )

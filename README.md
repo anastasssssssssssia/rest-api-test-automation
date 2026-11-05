@@ -19,7 +19,9 @@ python -m pip install -r requirements.txt
 
 ```powershell
 python -m pytest -v
-python -m pytest tests/test_users.py -v
+python -m pytest tests/api
+python -m pytest tests/unit
+python -m pytest tests/examples
 ```
 
 В полном прогоне есть skipped, xfailed и xpassed.
@@ -27,11 +29,13 @@ failed быть не должно.
 
 ## Структура
 
-- `tests/` тесты
+- `tests/api` проверки API
+- `tests/unit` проверки своих функций и классов
+- `tests/examples` примеры маркеров pytest
 - `conftest.py` общие фикстуры
 - `clients/api_client.py` HTTP-клиент
 - `config/settings.py` адрес API и таймаут
-- `config/api_config.py` конфигурация API
+- `config/api_config.py` адрес API из настроек и `API_BASE_URL`
 - `helpers/user_helpers.py` проверки данных пользователя
 - `models/user.py` модель пользователя
 
